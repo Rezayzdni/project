@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content  %}
     <div class="content-section">
-        <form method="POST">
+        <form method="POST" class="p-2">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">
@@ -33,37 +33,5 @@
              </a>
             </small>
     </div>
+<div style="height:40px"></div>
 {% endblock content %}
-
-
-
-<!--
-
-
-<h2 style="text-align: center">Login Form</h2>
-
-<form action="/" method="post">
-  <div class="imgcontainer">
-    <img src="../../static/users/avatar.png" alt="Avatar" class="avatar">
-  </div>
-
-  <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-
-    <button type="submit">Login</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-  </div>
-
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw"><a href="#">Forgot password?</a></span>
-  </div>
-</form>
-
--->
