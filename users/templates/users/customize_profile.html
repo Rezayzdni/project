@@ -1,0 +1,10 @@
+{% extends "blog/base.html" %}
+
+<div class="content-section">
+    <p>do u want to customize ur profile?</p>
+</div>
+<hr>
+<div class="content-section">
+    <a href="{% url 'user-profile' object.id %}" class="btn-outline-info btn-sm mt-1 mb-1 ml-5">Ok! Let's do it.</a>
+            <a href="{% url '' object.id %}" class="btn-outline-danger btn-sm mt-1 mb-1">Maybe later.</a>
+</div>

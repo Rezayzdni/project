@@ -1,0 +1,69 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content  %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">
+                    Log In
+                </legend>
+                {{ form|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">
+                    Login
+                </button>
+            </div>
+        </form>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+          Need An Account?
+            <a href="{% url 'user-register' %}" class="ml-2">
+                 Sign Up Now
+             </a>
+        </small>
+    </div>
+    <div class="border-top pt-3">
+
+    </div>
+    <small class="text-muted ml-2">
+                <a href="{% url 'password_reset' %}" class="ml-2">
+                 Forget Your Password?
+             </a>
+            </small>
+    </div>
+{% endblock content %}
+
+
+
+<!--
+
+
+<h2 style="text-align: center">Login Form</h2>
+
+<form action="/" method="post">
+  <div class="imgcontainer">
+    <img src="../../static/users/avatar.png" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <button type="submit">Login</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw"><a href="#">Forgot password?</a></span>
+  </div>
+</form>
+
+-->

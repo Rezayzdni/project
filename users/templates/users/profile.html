@@ -1,0 +1,46 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content  %}
+   <div class="content-section">
+   <div class="media">
+       <img class="rounded-circle account-img" src="{{user.profile.image.thumbnail.url}}">
+       <div class="media-body">
+           <h2 class="account-heading">
+               {{ user.username }}
+           </h2>
+           <div style="display: inline-block">
+               <strong class="text-secondary">Email Address:</strong>
+           </div>
+           <div style="display: inline-block">
+                <label class="text-muted" style="display: inline-block">
+                   <input class="border-0" type="text" value={{  user.email }} id="emailField">
+               </label>
+           </div>
+           <div style="display: inline-block">
+               <button class="btn-outline-success btn-sm mt-5 mb-5 ml-5" style="color: #f1f1f1">copy email</button>
+           </div>
+           <p class="text-secondary">
+               <strong>Phone No. :</strong> {{ user.profile.phoneNumber }}
+           </p>
+           <p class="text-secondary">
+               <strong>I live in: </strong> {{ user.profile.currentLocation }}
+           </p>
+       </div>
+   </div>
+    <form method="POST" class="p-2" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">
+                    Profile Info
+                </legend>
+                {{ uu_form|crispy}}
+                {{ pu_form|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">
+                    Update
+                </button>
+            </div>
+        </form>
+   </div>
+{% endblock content %}
