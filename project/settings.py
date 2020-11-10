@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'stdimage',
+    'app_googleauth',
     'crispy_forms',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
