@@ -1,6 +1,6 @@
 # DjangoBlog
 
-This is a highly secured blog application based on Django where users can create,retrieve,update and delete their own posts.
+This is a blog application based on Django where users can create,retrieve,update and delete their own posts.
 
 There is also a superuser which can control all users and their properties.
 
