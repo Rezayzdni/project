@@ -1,26 +1,18 @@
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, ContactUs
-from django.contrib.auth.models import User
+from .models import Post
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic.base import TemplateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .form import ContactUsForm
 from django.core.mail import send_mail
 
 
-# def home(request):
-#     context = {
-#         'posts': Post.objects.all(),
-#         'title': 'Home'
-#     }
-#
-#     return render(request, 'blog/home.html', context)
-
 class PostListView(ListView):
     model = Post
-    template_name = 'blog/home.html'  # <app>/<model>_<viewtype>.html
+    template_name = 'blog/home.html'
     context_object_name = 'theList'
     ordering = ['-date_posted']
     paginate_by = 5
@@ -80,26 +72,30 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-def about(request):
-    return render(request, 'blog/about.html', {'title': 'About'})
+class About(TemplateView):
+    template_name = 'blog/about.html'
 
 
-def contact_us(request):
-    if request.method == 'POST':
-        c_u_form = ContactUsForm(request.POST)
-        if c_u_form.is_valid():
-            # title = c_u_form.cleaned_data.get('title')
+class ContactUs(View):
+    form_class = ContactUsForm
+    template_name = 'blog/contact_us.html'
+
+    def get(self, request,*args, **kwargs):
+        contactus_form = self.form_class()
+        return render(request, self.template_name, {'contact_us_form': contactus_form})
+
+    def post(self, request, *args, **kwargs):
+        contactus_form = self.form_class(request.POST)
+        if contactus_form.is_valid():
             send_mail(subject=request.POST['title'],
                       message=request.POST['content'],
                       from_email=request.POST['email'],
                       recipient_list=[settings.EMAIL_HOST_USER],
-                      fail_silently=False,
-                      )
-            c_u_form.save()
+                      fail_silently=False, )
+            contactus_form.save()
             messages.success(request,
-                             f'thanks for contacting us! , our team will be in touch with you in less than 24 hours.')
+                             f'Thanks for contacting us! , Our team will be in touch with you in less than 24 hours.')
             return redirect('blog-home')
         else:
-            messages.ERROR(request, f'something went wrong!')
-    c_u_form = ContactUsForm()
-    return render(request, 'blog/contact_us.html', {'contact_us_form': c_u_form})
+            messages.error(request, f'something went wrong!')
+            return render(request, self.template_name, {'contact_us_form': contactus_form})

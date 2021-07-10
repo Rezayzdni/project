@@ -30,7 +30,7 @@
       <div class="collapse navbar-collapse" id="navbarToggle">
         <div class="navbar-nav mr-auto">
           <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
-            <a class="nav-item nav-link" href="{% url 'blog_contact_us' %}">Contact us</a>
+            <a class="nav-item nav-link" href="{% url 'blog-contact-us' %}">Contact us</a>
           <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
         </div>
         <!-- Navbar Right Side -->
@@ -53,14 +53,16 @@
     <div class="col-md-8">
      {% if messages %}
          {% for message in messages %}
-             <div class="alert alert-{{ message.tags }}">
-                    {{ message }}
-             </div>
+            {% if 'error' in message.tags %}
+                 <div class="alert alert-danger">
+                        {{ message }}
+                 </div>
+            {% else %}
+                <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                 </div>
+            {% endif %}
          {% endfor %}
-       {# {% elif user.is_authenticated %} #}
-{#         <div class="alert alert-success">#}
-                   {# Welcome {{ user.username }}!  #}
-{#             </div>#}
      {% endif %}
       {% block content %}{% endblock content%}
     </div>
@@ -68,12 +70,6 @@
       <div class="content-section">
         <h3>Django sidebar</h3>
         <p class='text-muted'>To Infinity ...
-<!--          <ul class="list-group">-->
-<!--            <li class="list-group-item list-group-item-light">Latest Posts</li>-->
-<!--            <li class="list-group-item list-group-item-light">Announcements</li>-->
-<!--            <li class="list-group-item list-group-item-light">Calendars</li>-->
-<!--            <li class="list-group-item list-group-item-light">etc</li>-->
-<!--          </ul>-->
       </div>
     </div>
   </div>
