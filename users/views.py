@@ -32,7 +32,7 @@ def profile(request):
             uu_form.save()
             pu_form.save()
             messages.success(request, f'Your account has been updated successfully!')
-            return render(request, 'users/profile.html', {'uu_form': uu_form, 'pu_form': pu_form,})
+            return redirect('user-profile')
     else:
         uu_form = UserUpdateForm(instance=request.user)
         pu_form = UserProfileForm(instance=request.user.profile)
