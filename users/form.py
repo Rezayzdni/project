@@ -5,11 +5,11 @@ from .models import Profile
 
 
 class UserRegistrationForm(UserCreationForm):
-    email = forms.EmailField()
+    email = forms.EmailField()  # by writing email field we make it required
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'email']
+        fields = ['username', 'first_name', 'last_name', 'email']
 
 
 class UserUpdateForm(forms.ModelForm):
@@ -17,7 +17,7 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username','first_name', 'email', ]
+        fields = ['username', 'first_name', 'last_name', 'email']
 
 
 class UserProfileForm(forms.ModelForm):

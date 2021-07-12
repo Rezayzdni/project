@@ -28,11 +28,11 @@ def profile(request):
     if request.method == 'POST':
         uu_form = UserUpdateForm(request.POST, instance=request.user)
         pu_form = UserProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        if uu_form.is_valid() and pu_form.is_valid():
+        if uu_form.is_valid() and pu_form.is_valid():#don forget to provide else statement
             uu_form.save()
             pu_form.save()
             messages.success(request, f'Your account has been updated successfully!')
-            return redirect('user-profile')
+            return render(request, 'users/profile.html', {'uu_form': uu_form, 'pu_form': pu_form,})
     else:
         uu_form = UserUpdateForm(instance=request.user)
         pu_form = UserProfileForm(instance=request.user.profile)
