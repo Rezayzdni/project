@@ -34,6 +34,7 @@ class PostDetailView(DetailView):
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
+    # default templateName -> <app_name>/<model>_form
     model = Post
     fields = ['title', 'content']
     success_url = '/'
@@ -62,6 +63,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    # default templateName -> <app_name>/<model>_confirm_delete
     model = Post
     success_url = '/'
 
@@ -80,7 +82,7 @@ class ContactUs(View):
     form_class = ContactUsForm
     template_name = 'blog/contact_us.html'
 
-    def get(self, request,*args, **kwargs):
+    def get(self, request, *args, **kwargs):
         contactus_form = self.form_class()
         return render(request, self.template_name, {'contact_us_form': contactus_form})
 

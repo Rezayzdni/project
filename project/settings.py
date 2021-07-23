@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 import environ
+
 env = environ.Env()
 environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -32,17 +33,24 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'stdimage',
-    'app_googleauth',
     'crispy_forms',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
+    'api.apps.ApiConfig',
+    'rest_framework',
+    'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
-    'rest_framework',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -73,25 +81,25 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+)
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
-    ),
+        'rest_framework.authentication.TokenAuthentication',),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 3,
-    'DEFAULT_THROTTLE_CLASSES': (
-        'rest_framework.throttling.AnonRateThrottle',
-        'rest_framework.throttling.UserRateThrottle'
-    ),
-    'DEFAULT_THROTTLE_RATES': {
-        'anon': '5/minute',
-        'user': '10/minute'
-    }
+    'PAGE_SIZE': 5
 }
 
 WSGI_APPLICATION = 'project.wsgi.application'
@@ -146,6 +154,7 @@ MEDIA_URL = '/media/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'blog-home'
 LOGIN_URL = 'user-login'
+SITE_ID = 1
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -153,3 +162,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env('EMAIL_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_PASS')
+
