@@ -4,6 +4,7 @@ This is a blog application based on Django where users can create,retrieve,updat
 Each user has it's own profile along with Profile Photo.
 In case of forgetting password , users can reset their password using gmail service(send an email to reset password).
 /////////////////////////////////////////////////////////////////////////////////
+
 Tokens : 
 
 username : <nob>
@@ -16,7 +17,7 @@ token : <7d23d9252c0e488bee848067f3efd9407799292f>
 
 /////////////////////////////////////////////////////////////////////////////////
 
-login to admin :
+login to admin panel :
 
 username : <reza>
 password : <testing 321>
