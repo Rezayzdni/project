@@ -28,7 +28,7 @@ def profile(request):
     if request.method == 'POST':
         uu_form = UserUpdateForm(request.POST, instance=request.user)
         pu_form = UserProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        if uu_form.is_valid() and pu_form.is_valid():  # don forget to provide else statement
+        if uu_form.is_valid() and pu_form.is_valid():
             uu_form.save()
             pu_form.save()
             messages.success(request, f'Your account has been updated successfully!')
