@@ -1,2 +1,12 @@
-markdown
-Django~=3.1.2
+asgiref==3.2.10
+Django==3.1.2
+django-crispy-forms==1.9.2
+django-environ==0.4.5
+django-stdimage==5.1.1
+djangorestframework==3.12.1
+Pillow==8.3.1
+progressbar2==3.53.1
+python-utils==2.5.6
+pytz==2021.1
+six==1.16.0
+sqlparse==0.4.1

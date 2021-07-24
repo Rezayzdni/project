@@ -1,6 +1,0 @@
-rest api
-google auth
-recurisive comments for posts
-*like or dislike for each post
-posts with photos and text
-using postgresql or mongodb
